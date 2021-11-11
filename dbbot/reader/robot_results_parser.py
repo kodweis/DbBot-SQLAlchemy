@@ -86,7 +86,6 @@ class RobotResultsParser(object):
         self._db.insert_or_ignore('tag_status', {
             'test_run_id': test_run_id,
             'name': stat.name,
-            'critical': int(stat.critical),
             'elapsed': getattr(stat, 'elapsed', None),
             'failed': stat.failed,
             'passed': stat.passed
@@ -125,8 +124,8 @@ class RobotResultsParser(object):
         self._db.insert_or_ignore('suite_status', {
             'test_run_id': test_run_id,
             'suite_id': suite_id,
-            'passed': suite.statistics.all.passed,
-            'failed': suite.statistics.all.failed,
+            'passed': suite.statistics.passed,
+            'failed': suite.statistics.failed,
             'elapsed': suite.elapsedtime,
             'status': suite.status
         })
